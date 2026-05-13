@@ -1,0 +1,61 @@
+name: GitHub Actions CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    env:
+      JEKYLL_ENV: production
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v6
+
+      - name: Set up Homebrew
+        id: setup-homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+        with:
+          core: false
+          cask: false
+
+      - name: Cache Homebrew prefix
+        uses: Homebrew/actions/cache-homebrew-prefix@main
+        with:
+          brewfile: true
+          uninstall: true
+
+      - name: Set up Ruby
+        uses: Homebrew/actions/setup-ruby@main
+        with:
+          bundler-cache: true
+
+      - name: Cache HTML Proofer
+        uses: actions/cache@v5
+        with:
+          path: tmp/.htmlproofer
+          key: ${{ runner.os }}-htmlproofer
+
+      - name: Run HTML Proofer
+        run: bundle exec rake test
+
+      - name: Upload GitHub Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v5
+
+  deploy:
+    needs: tests
+    if: ${{ always() && github.ref_name == 'main' }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/deploy-pages@v5
+        id: deploy-pages
+    outputs:
+      deploy_url: ${{ steps.deploy-pages.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy-pages.outputs.page_url }}

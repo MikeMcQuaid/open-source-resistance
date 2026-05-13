@@ -1,0 +1,10 @@
+_site/
+.jekyll-cache/
+.sass-cache/
+.bundle/
+tmp/
+vendor/bundle/
+
+# local reference checkout not for this repo
+/mikemcquaid.com/
+

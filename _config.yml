@@ -1,0 +1,40 @@
+title: Open Source Resistance
+description: A direct-action manifesto for maintainers keeping open source alive on company time.
+url: https://ossresistance.com
+lang: en-GB
+timezone: Europe/London
+
+author:
+  name: Mike McQuaid
+  email: mike@mikemcquaid.com
+  uri: https://mikemcquaid.com
+
+twitter:
+  card: summary_large_image
+
+social:
+  name: Mike McQuaid
+  links:
+    - https://mikemcquaid.com
+    - https://github.com/MikeMcQuaid
+    - https://mastodon.social/@mikemcquaid
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+exclude:
+  - AGENTS.md
+  - Brewfile
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - Rakefile
+  - bin/
+  - mikemcquaid.com/
+  - tmp/
+  - vendor/
+
+github:
+  repository_nwo: MikeMcQuaid/open-source-resistance

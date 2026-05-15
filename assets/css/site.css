@@ -273,7 +273,7 @@ h3 {
 }
 
 .bio-quote {
-  margin: 1.4rem 0 0;
+  margin: 1.4rem 0;
   padding: 1rem 1.25rem;
   border-left: 4px solid var(--amber);
   border-radius: 0 6px 6px 0;
